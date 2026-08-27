@@ -1,25 +1,33 @@
 {
   "manifest_version": 3,
   "name": "Bitcoin Bity Price",
-  "version": "1.0",
-  "description": "Mostra a cotação do Bitcoin da Bity direto na barra de ferramentas",
-  "permissions": ["storage"],
+  "version": "1.2",
+  "description": "Cotação do Bitcoin do BitPreço direto na barra de ferramentas, com carteira e alertas de preço",
+  "permissions": ["storage", "alarms", "notifications"],
   "host_permissions": [
+    "https://api.bitpreco.com/",
     "https://api.binance.com/"
   ],
   "action": {
     "default_popup": "popup.html",
+    "default_title": "Preço do Bitcoin (BitPreço)",
     "default_icon": {
-      "48": "icon48.png"
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
   },
   "background": {
     "service_worker": "background.js"
   },
   "icons": {
-    "48": "icon48.png"
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }
-} 
+}

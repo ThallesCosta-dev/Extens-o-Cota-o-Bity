@@ -13,25 +13,98 @@
           <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#F7931A"/>
           <path d="M17.3903 10.4016C17.5867 8.78378 16.3453 7.93768 14.6493 7.35949L15.2417 5.15238L13.9411 4.81949L13.3649 6.97259C13.0361 6.89483 12.6978 6.82227 12.3611 6.75097L12.9421 4.58168L11.6423 4.24879L11.0491 6.4559C10.7764 6.39729 10.5093 6.34059 10.2511 6.28119L10.2529 6.27389L8.48327 5.81699L8.12938 7.20488C8.12938 7.20488 9.08857 7.42982 9.06617 7.44476C9.57236 7.57073 9.67272 7.90362 9.65472 8.16585L8.98474 10.6974C9.02254 10.7071 9.07204 10.7215 9.12694 10.7449L8.98294 10.7071L8.05135 14.2533C7.98399 14.4007 7.82203 14.6233 7.47174 14.5361C7.48614 14.5571 6.53415 14.2938 6.53415 14.2938L5.86237 15.7765L7.53729 16.2118C7.83929 16.2842 8.13589 16.3604 8.42709 16.432L7.82923 18.6679L9.12874 19.0008L9.72113 16.7937C10.0643 16.8833 10.3963 16.9655 10.7211 17.0422L10.1305 19.2385L11.4311 19.5714L12.029 17.3409C14.3332 17.7426 16.0814 17.5856 16.8754 15.4973C17.5238 13.8219 16.8574 12.8647 15.5766 12.2577C16.5196 12.0375 17.2448 11.4609 17.3903 10.4016ZM14.3944 14.6017C13.9375 16.2771 11.1629 15.4055 10.2565 15.1726L11.0437 12.2037C11.9501 12.4384 14.8747 12.8443 14.3944 14.6017ZM14.8513 10.3782C14.4368 11.9064 12.0974 11.1578 11.3462 10.9647L12.0594 8.27161C12.8106 8.46471 15.2866 8.77679 14.8513 10.3782Z" fill="white"/>
         </svg>
-        <span>Preço do Bitcoin (BTC)</span>
+        <div class="title-text">
+          <span class="title-name">Bitcoin</span>
+          <span class="title-sub">BitPreço</span>
+        </div>
       </div>
-      <select id="currency" class="currency-select">
-        <option value="BRL">BRL</option>
-        <option value="USD">USD</option>
-      </select>
+      <div class="currency-toggle">
+        <button class="currency-btn active" data-currency="BRL">BRL</button>
+        <button class="currency-btn" data-currency="USD">USD</button>
+      </div>
     </div>
+
     <div class="price-info">
-      <div class="currency-label">BTC para <span class="currency-type">BRL</span></div>
-      <div class="price-details">
-        <span class="price-label">1 Bitcoin é igual a </span>
-        <span id="price"></span>
+      <div class="currency-label">BTC / <span class="currency-type">BRL</span></div>
+      <div class="price-row">
+        <span id="price">carregando…</span>
         <span id="price-change"></span>
       </div>
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-label">Máx 24h</span>
+          <span class="stat-value" id="stat-high">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Mín 24h</span>
+          <span class="stat-value" id="stat-low">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Compra</span>
+          <span class="stat-value" id="stat-buy">—</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Venda</span>
+          <span class="stat-value" id="stat-sell">—</span>
+        </div>
+      </div>
+      <div id="status" class="status hidden"></div>
     </div>
-    <div class="chart-container">
+
+    <div class="wallet card">
+      <div class="wallet-header">
+        <span class="wallet-label">Minha carteira</span>
+        <button id="eye-btn" class="eye-btn" title="Ocultar/mostrar valores">👁</button>
+      </div>
+      <div class="wallet-inputs">
+        <input type="number" id="wallet-amount" placeholder="Qtde de BTC" min="0" step="any">
+        <input type="number" id="wallet-paid" placeholder="Total pago (R$)" min="0" step="any">
+      </div>
+      <div class="wallet-stats">
+        <div class="wallet-stat">
+          <span class="wallet-stat-label">Valor atual</span>
+          <span class="wallet-stat-value" id="wallet-value">—</span>
+        </div>
+        <div class="wallet-stat">
+          <span class="wallet-stat-label">Resultado</span>
+          <span class="wallet-stat-value" id="wallet-pl">—</span>
+        </div>
+        <div class="wallet-stat">
+          <span class="wallet-stat-label">Hoje</span>
+          <span class="wallet-stat-value" id="wallet-day">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-header">
+      <span class="chart-title">Histórico</span>
+      <div class="period-selector">
+        <button class="period-btn active" data-period="1h">1H</button>
+        <button class="period-btn" data-period="24h">24H</button>
+        <button class="period-btn" data-period="7d">7D</button>
+      </div>
+    </div>
+    <div class="chart-container card">
       <canvas id="priceChart"></canvas>
     </div>
+
+    <div class="alert-row">
+      <input type="number" id="alert-value" placeholder="Alerta de preço (ex: 450000)" min="0" step="any">
+      <button id="alert-btn">Criar alerta</button>
+    </div>
+    <div id="alerts-list"></div>
+
+    <div class="settings-row">
+      <span class="settings-label">Ícone mostra</span>
+      <div class="badge-toggle">
+        <button class="badge-btn active" data-mode="price">Preço</button>
+        <button class="badge-btn" data-mode="wallet">Carteira</button>
+        <button class="badge-btn" data-mode="change">Variação</button>
+      </div>
+    </div>
+
+    <div class="footer"><span id="updated-ago"></span> · Preço: BitPreço · Gráfico: Binance</div>
   </div>
   <script src="popup.js"></script>
 </body>
-</html> 
+</html>
